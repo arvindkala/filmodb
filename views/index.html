@@ -66,6 +66,7 @@
 				method: "POST",
 				data: { 'imdb_id' : imdb_id },
 			}).done(function(data) {
+					$('#movie-review-modal .modal-body .success-msg').hide();
 				  $("#movie-review-modal").find('#movie-review-imdb-id').text( data.id )
 				  $("#movie-review-modal").find('#movie-review-description').text( data.description )
 				  $("#movie-review-modal").find('#movie-review-rating').text( data.review.rating )
