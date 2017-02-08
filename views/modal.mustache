@@ -1,28 +1,46 @@
 <div class="modal fade" id="movie-review-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="movie-review-name">{{ title }}</h4>
-      </div>
-      <div class="modal-body">
-        <div>
-          <h4>Description</h4>
-          <span id="movie-review-description"></span>
-        </div>
-        <div>
-          <h4>Cast</h4>
-          <span id="movie-review-cast"></span>
-        </div>
-        <div>
-          <h4>IMDB Rating</h4>
-          <span id="movie-review-rating"></span>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h3 class="modal-title" id="movie-review-title"></h4>
+		<span class="hidden" id="movie-review-imdb-id"></span>
+	  </div>
+	  <div class="modal-body">
+	  	<h2 class="success-msg"></h2>
+		<div>
+		  <h4>Description</h4>
+		  <span id="movie-review-description"></span>
+		</div>
+		<div>
+		  <h4>IMDB Rating</h4>
+		  <span id="movie-review-rating"></span>
+		</div>
+		<div>
+		  <h4>Cast</h4>
+		  <span id="movie-review-cast"></span>
+		</div>
+
+		<h1> Give your Review </h1>
+		<form id="review-form" action="/save-comment" method="POST">
+			<div class="form-group row">
+			  <label for="review-email-input" class="col-2 col-form-label">Email</label>
+			  <div class="col-10">
+			    <input class="form-control" type="email" placeholder="sample@example.com" id="review-email-input">
+			  </div>
+			</div>
+			<div class="form-group row">
+			  <label for="review-text-input" class="col-2 col-form-label">Review</label>
+			  <div class="col-10">
+			    <input class="form-control" type="textarea" id="review-text-input">
+			  </div>
+			</div>
+		</form>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="button" id="modal-footer-save" class="btn btn-primary">Save changes</button>
+	  </div>
+	</div>
   </div>
 </div>

@@ -59,18 +59,33 @@
 	$(document).ready(function(){
 	    $(".movie-details").click(function(){
 	    	var imdb_id = $(this).find('div span').text().trim();
+	    	var movie_title = $(this).find('div h1').text().trim();
+	    	$("#movie-review-modal").find('#movie-review-title').text( movie_title )
 	    	$.ajax({
 			  	url: "/movie-details",
 				method: "POST",
 				data: { 'imdb_id' : imdb_id },
 			}).done(function(data) {
+				  $("#movie-review-modal").find('#movie-review-imdb-id').text( data.id )
 				  $("#movie-review-modal").find('#movie-review-description').text( data.description )
 				  $("#movie-review-modal").find('#movie-review-rating').text( data.review.rating )
 				  $("#movie-review-modal").find('#movie-review-cast').text( JSON.stringify(data.cast ))
 				  $("#movie-review-modal").modal();
 			});
 	    });
-	    
+	     $('#modal-footer-save').click(function(){
+	     	var email = $('#movie-review-modal #review-email-input').val();
+	     	var review = $('#movie-review-modal #review-text-input').val();
+	     	var imdb_id = $('#movie-review-imdb-id').text();
+	     	$.ajax({
+			  	url: "/save-comment",
+				method: "POST",
+				data: { 'email' : email, 'review' : review, 'imdb_id' : imdb_id },
+			}).done(function(data) {
+				$('#movie-review-modal .modal-body .success-msg').text(data);
+				$("#movie-review-modal").modal();
+			});
+		}); 
 	});
 	</script>
 </body>
