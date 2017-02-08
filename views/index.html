@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  	.caption {
+  		position:absolute;
+  		bottom: 1rem;
+  	}
+  	img {
+  		height: 300px;
+   		width: 250px;
+	}
+	.caption h1 {
+		background: cornsilk;
+	    width: 250px;
+	    color: rosybrown;
+	    text-align: center;
+	}
+  </style>
+</head>
+<body>
+	<div class="container">
+		<form action="/search" method="POST">
+			<div class="input-group">
+				<label for="query_string"> Enter Movie for search for </label>
+				<input class="form-control" type="text" name="query_string" id="query_string" value={{ body.term }} />
+			</div>
+		</form>
+		<div class="col-sm-12 row">
+			{{#body}}
+		  		{{#data}}
+		  			{{#results}}
+		  				{{ #titles }}
+							<div class="col-md-4 col-sm-2 col-xs-1">
+								<a class="movie-details">
+									<img src="{{ thumbnail }}" />
+									<div class="caption">
+					                    <h1>{{ title }}</h1>
+					                    <span style="visibility:hidden;">{{ id }}</h1>
+					                </div>
+					            </a>	
+							</div>
+		  				{{ /titles }}
+		    		{{/results}}
+		  		{{/data}}
+			{{/body}}
+		</div>
+		{{> modal }}
+	</div>
+
+	<script>
+	$(document).ready(function(){
+	    $(".movie-details").click(function(){
+	    	var imdb_id = $(this).find('div span').text().trim();
+	    	$.ajax({
+			  	url: "/movie-details",
+				method: "POST",
+				data: { 'imdb_id' : imdb_id },
+			}).done(function(data) {
+				  $("#movie-review-modal").find('#movie-review-description').text( data.description )
+				  $("#movie-review-modal").find('#movie-review-rating').text( data.review.rating )
+				  $("#movie-review-modal").find('#movie-review-cast').text( JSON.stringify(data.cast ))
+				  $("#movie-review-modal").modal();
+			});
+	    });
+	    
+	});
+	</script>
+</body>
+</html>
