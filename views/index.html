@@ -84,6 +84,7 @@
 				data: { 'email' : email, 'review' : review, 'imdb_id' : imdb_id },
 			}).done(function(data) {
 				$('#movie-review-modal .modal-body .success-msg').text(data);
+				$('#movie-review-modal .modal-body .success-msg').show();
 				$("#movie-review-modal").modal();
 			});
 		}); 
