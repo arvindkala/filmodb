@@ -76,8 +76,9 @@ app.post('/save-comment', function(req, res) {
 	var email = req.body.email;
 	var review = req.body.review;
 	var imdb_id = req.body.imdb_id;
-	
-	query = 'INSERT INTO dogether.reviews (imdb_id, email, review) VALUES ( "' + imdb_id + '", "'+ email + '", "'+ review + '" )';
+	var config = require('./config.js');
+
+	query = 'INSERT INTO '+ config.db_name +'.'+ config.table_name+' (imdb_id, email, review) VALUES ( "' + imdb_id + '", "'+ email + '", "'+ review + '" )';
 	var connection = require('./db.js');
 	connection.query( query, function (err, rows, fields) {
 		if( err) {
