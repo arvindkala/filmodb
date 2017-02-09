@@ -23,22 +23,28 @@
 	    color: rosybrown;
 	    text-align: center;
 	}
+	.padding-bottom-15 {
+		padding-bottom: 15px;
+	}
   </style>
 </head>
 <body>
 	<div class="container">
-		<form action="/search" method="POST">
-			<div class="input-group">
-				<label for="query_string"> Enter Movie for search for </label>
-				<input class="form-control" type="text" name="query_string" id="query_string" value={{ body.term }} />
-			</div>
-		</form>
-		<div class="col-sm-12 row">
+		<h1> Movie Review System (MRS) </h1>
+		<div class="row padding-bottom-15">
+			<form action="/search" method="POST">
+				<div class="input-group">
+					<label for="query_string"> Enter Movie for search for </label>
+					<input class="form-control" type="text" name="query_string" id="query_string" value={{ body.term }} />
+				</div>
+			</form>
+		</div>
+		<div class="row">
 			{{#body}}
 		  		{{#data}}
 		  			{{#results}}
 		  				{{ #titles }}
-							<div class="col-md-4 col-sm-2 col-xs-1">
+							<div class="col-md-4 col-sm-6 col-12 padding-bottom-15">
 								<a class="movie-details">
 									<img src="{{ thumbnail }}" />
 									<div class="caption">
